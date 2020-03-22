@@ -8,6 +8,8 @@ module Decoru
         all.map(&:decorate)
       end
 
+      alias_method :decoru, :decorate
+
       # Infers the decorator class to be used by (e.g. `User` maps to `UserDecorator`).
       # adapted from https://github.com/drapergem/draper/blob/157eb955072a941e6455e0121fca09a989fcbc21/lib/draper/decoratable.rb#L71
       def decorator_class(called_on = self)
@@ -26,6 +28,8 @@ module Decoru
     def decorate
       self.class.decorator_class.new(self)
     end
+
+    alias_method :decoru, :decorate
 
     def decorated?
       false

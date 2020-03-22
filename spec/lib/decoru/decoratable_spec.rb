@@ -20,6 +20,16 @@ RSpec.describe Decoru::Decoratable do
     end
   end
 
+  describe '#decoru' do
+    it 'returns a decorator for self' do
+      product = Product.new
+      decorator = product.decoru
+
+      expect(decorator).to be_a ProductDecorator
+      expect(decorator.object).to be product
+    end
+  end
+
   describe '#decorated?' do
     it 'returns false' do
       expect(Product.new).not_to be_decorated
@@ -34,6 +44,17 @@ RSpec.describe Decoru::Decoratable do
       allow(Product).to receive(:all).and_return(scoped)
 
       expect(Product.decorate).to eq [:decorated]
+    end
+  end
+
+  describe '.decoru' do
+    it 'delegates missing methods that exist on the object' do
+      product = Product.new
+      scoped = [product]
+      allow(product).to receive(:decorate).and_return(:decorated)
+      allow(Product).to receive(:all).and_return(scoped)
+
+      expect(Product.decoru).to eq [:decorated]
     end
   end
 

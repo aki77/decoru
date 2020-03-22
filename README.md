@@ -7,11 +7,15 @@ A simple decorator for Rails models.
 ```ruby
 # app/controllers/users_controller.rb
 def show
-  @user = User.find(params[:id]).decorate
+  @user = User.find(params[:id]).decoru
+  # or
+  # @user = User.find(params[:id]).decorate
 end
 
 def index
-  @users = User.first(10).decorate
+  @users = User.first(10).decoru
+  # or
+  # @users = User.first(10).decorate
 end
 ```
 
